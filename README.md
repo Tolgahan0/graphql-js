@@ -1,44 +1,42 @@
 # GraphQL.js
 
-The JavaScript reference implementation for GraphQL, a query language for APIs created by Facebook.
+Facebook tarafından oluşturulan API'ler için bir sorgu dili olan GraphQL için JavaScript referans uygulamasıdır.
 
 [![npm version](https://badge.fury.io/js/graphql.svg)](https://badge.fury.io/js/graphql)
 [![Build Status](https://github.com/graphql/graphql-js/workflows/CI/badge.svg?branch=main)](https://github.com/graphql/graphql-js/actions?query=branch%3Amain)
 
-See more complete documentation at https://graphql.org/ and
-https://graphql.org/graphql-js/.
+Daha eksiksiz belgelere şu adresten bakın: https://graphql.org / ve
+https://graphql.org/graphql-js /.
 
-Looking for help? Find resources [from the community](https://graphql.org/community/).
+Yardım mı arıyorsunuz? Kaynakları bulun [topluluktan](https://graphql.org/community /).
 
-## Getting Started
+## Başlabgıç
 
-A general overview of GraphQL is available in the
-[README](https://github.com/graphql/graphql-spec/blob/main/README.md) for the
-[Specification for GraphQL](https://github.com/graphql/graphql-spec). That overview
-describes a simple set of GraphQL examples that exist as [tests](src/__tests__)
-in this repository. A good way to get started with this repository is to walk
-through that README and the corresponding tests in parallel.
+Graphql'e genel bir bakış aşağıda ki linkte mevcuttur:
+[BENİOKU](https://github.com/graphql/graphql-spec/blob/main/README.md ) için
+[GraphQL için şartname] (https://github.com/graphql/graphql-spec ). Genel bakış
+[tests](src/__tests__) olarak var olan basit bir GraphQL örnekleri kümesini açıklar.
 
-### Using GraphQL.js
+### GraphQl.js Kullanmak
 
-Install GraphQL.js from npm
+GraphQL.js'i aşağıda ki npm'i kullanarak indirin
 
-With npm:
+Npm linki
 
 ```sh
 npm install --save graphql
 ```
 
-or using yarn:
+ veya yarn kullanabilirsin :
 
 ```sh
 yarn add graphql
 ```
 
-GraphQL.js provides two important capabilities: building a type schema and
-serving queries against that type schema.
+GraphQL.js iki önemli yetenek sağlar: bir tür şeması oluşturmak ve
+bu tür şemaya karşı sorgular sunmak.
 
-First, build a GraphQL type schema which maps to your codebase.
+İlk olarak, kod tabanınızla eşleşen bir GraphQL tipi şema oluşturun.
 
 ```js
 import {
@@ -63,11 +61,11 @@ var schema = new GraphQLSchema({
 });
 ```
 
-This defines a simple schema, with one type and one field, that resolves
-to a fixed value. The `resolve` function can return a value, a promise,
-or an array of promises. A more complex example is included in the top-level [tests](src/__tests__) directory.
+Bu, çözümleyen bir tür ve bir alan içeren basit bir şema tanımlar
+sabit bir değere. 'Çözümle' işlevi bir değer, bir söz döndürebilir,
+ya da bir dizi söz. Daha karmaşık bir örnek, üst düzey [testler](src /__testler__) dizinine dahil edilmiştir.
 
-Then, serve the result of a query against that type schema.
+Ardından, bu tür şemaya karşı bir sorgunun sonucunu sunun.
 
 ```js
 var source = '{ hello }';
@@ -80,10 +78,9 @@ graphql({ schema, source }).then((result) => {
   console.log(result);
 });
 ```
-
-This runs a query fetching the one field defined. The `graphql` function will
-first ensure the query is syntactically and semantically valid before executing
-it, reporting errors otherwise.
+Bu, tanımlanan bir alanı getiren bir sorgu çalıştırır. `Graphql' işlevi
+önce yürütmeden önce sorgunun sözdizimsel ve anlamsal olarak geçerli olduğundan emin olun
+aksi takdirde hataları bildirir.
 
 ```js
 var source = '{ BoyHowdy }';
@@ -100,48 +97,47 @@ graphql({ schema, source }).then((result) => {
 });
 ```
 
-**Note**: Please don't forget to set `NODE_ENV=production` if you are running a production server. It will disable some checks that can be useful during development but will significantly improve performance.
+** Not **: Bir üretim sunucusu çalıştırıyorsanız lütfen `NODE_ENV =production' ayarlamayı unutmayın. Geliştirme sırasında yararlı olabilecek ancak performansı önemli ölçüde artıracak bazı kontrolleri devre dışı bırakacaktır.
 
-### Want to ride the bleeding edge?
+### En güncel teknoloji ile çalışmak ister misin ?
 
-The `npm` branch in this repository is automatically maintained to be the last
-commit to `main` to pass all tests, in the same form found on npm. It is
-recommended to use builds deployed to npm for many reasons, but if you want to use
-the latest not-yet-released version of graphql-js, you can do so by depending
-directly on this branch:
-
+Bu depodaki `npm'nin şubesi otomatik olarak son şube olarak korunur
+npm'de bulunan aynı biçimde tüm testleri geçmek için 'ana' taahhüt edin. O
+birçok nedenden dolayı npm'e dağıtılan yapıları kullanmanız önerilir, ancak kullanmak istiyorsanız
+graphql-js'nin henüz yayınlanmamış en son sürümü, bunu aşağıdakilere bağlı olarak yapabilirsiniz
+Aşağıdakini indirin:
 ```
 npm install graphql@git://github.com/graphql/graphql-js.git#npm
 ```
 
-### Using in a Browser
+### Tarayıcıda kullanmak ?
 
-GraphQL.js is a general-purpose library and can be used both in a Node server
-and in the browser. As an example, the [GraphiQL](https://github.com/graphql/graphiql/)
-tool is built with GraphQL.js!
+GraphQL.js genel amaçlı bir kütüphanedir ve her ikisi de bir bağıl sunucusunda ve tarayıcıda kullanılabilir
+ Örnek olarak, [GraphiQL](https://github.com/graphql/graphql /)
+araç GraphQL.js ile oluşturulmuştur.
 
-Building a project using GraphQL.js with [webpack](https://webpack.js.org) or
-[rollup](https://github.com/rollup/rollup) should just work and only include
-the portions of the library you use. This works because GraphQL.js is distributed
-with both CommonJS (`require()`) and ESModule (`import`) files. Ensure that any
-custom build configurations look for `.mjs` files!
+GraphQL.js kullanarak bir proje oluşturmak [webpack] ile  (https://webpack.js.org ) veya
+[[roll up](https://github.com/rollup/rollup ) çalışmalı ve sadece şunları içermelidir
+kullandığınız kütüphanenin bölümleri. Bu işe yarıyor çünkü GraphQL.js dağıtıldı
+hem CommonJS (`require ()`) hem de Module (`import') dosyaları . Herhangi bir
+özel yapı yapılandırmaları arayın ( `.mj' dosyaları)
 
-### Contributing
+### Katkı
 
-We actively welcome pull requests. Learn how to [contribute](./.github/CONTRIBUTING.md).
+Destek taleplerini aktif olarak memnuniyetle karşılıyoruz. Nasıl katkıda bulunacağınızı öğrenin (./.github/CONTRİBUTİNG.md).
 
-This repository is managed by EasyCLA. Project participants must sign the free ([GraphQL Specification Membership agreement](https://preview-spec-membership.graphql.org) before making a contribution. You only need to do this one time, and it can be signed by [individual contributors](http://individual-spec-membership.graphql.org/) or their [employers](http://corporate-spec-membership.graphql.org/).
+Bu depo Easy CIA tarafından yönetilmektedir. Proje katılımcıları katkıda bulunmadan önce ücretsiz ([GraphQL Spesifikasyonu Üyelik sözleşmesi]) imzalamalıdır. (https://preview-spec-membership.graphql.org )  Bunu yalnızca bir kez yapmanız gerekir ve [bireysel katkıda bulunanlar] tarafından imzalanabilir (http://individual-spec-membership.graphql.org /) veya [işverenleri] (http://corporate-spec-membership.graphql.org /).
 
-To initiate the signature process please open a PR against this repo. The EasyCLA bot will block the merge if we still need a membership agreement from you.
+İmza sürecini başlatmak için lütfen bu repoya karşı bir PR açın. Sizden hala bir üyelik anlaşması talebimiz  olursa Easy sınıfı birleşmeyi engelleyecektir.
 
-You can find [detailed information here](https://github.com/graphql/graphql-wg/tree/main/membership). If you have issues, please email [operations@graphql.org](mailto:operations@graphql.org).
+[Detaylı bilgiyi burada bulabilirsiniz](https://github.com/graphql/graphql-wg/tree/main/membership ). Sorunlarınız varsa, lütfen e-posta gönderin [operations@graphql.org ](mailto:operations@graphql.org ).
 
-If your company benefits from GraphQL and you would like to provide essential financial support for the systems and people that power our community, please also consider membership in the [GraphQL Foundation](https://foundation.graphql.org/join).
+Şirketiniz graphql'den yararlanıyorsa ve topluluğumuza güç veren sistemler ve kişiler için gerekli finansal desteği sağlamak istiyorsanız, lütfen [GraphQL Vakfı'na] üyeliği de göz önünde bulundurun (https://foundation.graphql.org/join ).
 
-### Changelog
+### Değişiklik takipleme
 
-Changes are tracked as [GitHub releases](https://github.com/graphql/graphql-js/releases).
+Değişiklikler [GitHub sürümleri] olarak izlenir (https://github.com/graphql/graphql-js/releases ).
 
-### License
+### Lisans
 
-GraphQL.js is [MIT-licensed](./LICENSE).
+GraphQL.js [MIT lisanslıdır](./LİSANS).
